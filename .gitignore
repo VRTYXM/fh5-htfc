@@ -1,2 +1,5 @@
 # Ignore node_modules
 **/node_modules
+
+# Ingore car photos in HQ
+**/cars_hq
