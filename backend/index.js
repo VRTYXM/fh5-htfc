@@ -2,6 +2,13 @@ import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+if (!process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET is not defined in .env file');
+}
 
 import { carCardCreateValidation, loginValidation, registerValidation } from './validations.js';
 import handleValidationErrors from './utils/handleValidationErrors.js';

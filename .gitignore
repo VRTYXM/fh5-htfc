@@ -3,3 +3,6 @@
 
 # Ingore car photos in HQ
 **/cars_hq
+
+// Ignore Environment Variables
+.env
