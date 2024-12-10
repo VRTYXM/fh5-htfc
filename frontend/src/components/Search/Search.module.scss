@@ -1,0 +1,47 @@
+@import '../../scss/_variables.scss';
+
+.root {
+  display: block;
+  position: relative;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 12px 20px 12px 40px;
+  font-size: 12px;
+  border: 1px solid rgba($black, 0.3);
+  border-radius: 5px;
+  letter-spacing: 1px;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    border: 1px solid rgba($black, 0.8);
+    font-size: 12px;
+    font-family: inherit;
+  }
+}
+
+.searchIcon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.3;
+  position: absolute;
+  left: 15px;
+  top: 11px;
+}
+
+.clearIcon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.3;
+  position: absolute;
+  right: 15px;
+  top: 11px;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

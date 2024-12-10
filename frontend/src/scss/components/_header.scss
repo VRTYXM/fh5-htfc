@@ -1,0 +1,42 @@
+@import '../_variables.scss';
+
+.header {
+  background-color: rgba($black, 0.7);
+  padding: 20px 20px;
+  border-bottom: 1px solid $white;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 445px) {
+      justify-content: center;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-right: 20px;
+    }
+
+    h1 {
+      color: $white;
+      font-weight: 700;
+      letter-spacing: -1px;
+      font-size: 32px;
+      white-space: nowrap;
+
+      @media (max-width: 445px) {
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 445px) {
+      flex-direction: column;
+    }
+  }
+}

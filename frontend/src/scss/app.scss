@@ -1,0 +1,361 @@
+@import './variables.scss';
+@import './normalize.scss';
+@import './components/_all.scss';
+
+body {
+  background-image: url(../assets/img/bcg-ferrari.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.table-wrapper {
+  min-height: 100vh;
+}
+
+.content {
+  background-color: rgba($black, 0.85);
+
+  &__car-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    color: $white;
+
+    p {
+      color: $white;
+      font-weight: 700;
+      font-size: 36px;
+      margin-left: 10px;
+      align-self: center;
+    }
+  }
+
+  .car-cards {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+
+    .car-cards__legend {
+      color: $white;
+      -webkit-text-stroke: 0.5px;
+      letter-spacing: 1px;
+
+      tr {
+        border: 1px solid rgba($grey, 0.3);
+        text-align: center;
+
+        .number {
+          width: 5%;
+        }
+
+        .photo {
+          width: 15%;
+        }
+
+        .names {
+          width: 60%;
+
+          tr {
+            border: none;
+          }
+
+          .fullName {
+            text-align: left;
+          }
+
+          .nickname {
+            text-align: left;
+            color: $grey;
+          }
+        }
+
+        .add {
+          width: 5%;
+        }
+
+        .del {
+          width: 5%;
+        }
+      }
+    }
+
+    .car-cards__table {
+      text-align: center;
+      line-height: 1.5em;
+
+      button {
+        padding: 10px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 11px;
+        margin: auto 5px;
+        font-weight: 600;
+        color: $white;
+        cursor: pointer;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        @include noselect();
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        &:active {
+          opacity: 0.7;
+        }
+      }
+
+      tr {
+        border: 1px solid rgba($grey, 0.3);
+
+        .number {
+          color: $white;
+          -webkit-text-stroke: 0.5px;
+        }
+
+        .photo {
+          height: 70px;
+          padding: 10px;
+          position: relative;
+
+          img {
+            max-height: 50px;
+            max-width: 100px;
+            display: block;
+            justify-self: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+
+            &.lazyloaded {
+              opacity: 1;
+            }
+          }
+        }
+
+        .names {
+          text-align: left;
+
+          tr {
+            border: none;
+          }
+
+          .fullName {
+            color: $white;
+          }
+
+          .nickname {
+            color: $grey;
+          }
+        }
+
+        .add {
+          button {
+            background-color: #0cf800;
+          }
+        }
+
+        .del {
+          button {
+            background-color: #ff4a4a;
+            filter: brightness(20%);
+            cursor: not-allowed;
+            pointer-events: none;
+          }
+        }
+      }
+      .collected {
+        td {
+          &:nth-child(-n + 3) {
+            opacity: 0.3;
+          }
+        }
+
+        .add {
+          button {
+            filter: brightness(20%);
+            cursor: not-allowed;
+            pointer-events: none;
+          }
+        }
+
+        .del {
+          button {
+            filter: none;
+            cursor: pointer;
+            pointer-events: all;
+          }
+        }
+      }
+
+      .not-found {
+        display: table-row;
+        color: $white;
+
+        .photo {
+          place-items: center;
+        }
+
+        &.not-found-wide {
+          width: 65%;
+          margin-bottom: 5px;
+
+          span {
+            position: absolute;
+          }
+        }
+
+        &.not-found-thin {
+          width: 45%;
+        }
+
+        &.not-found-button {
+          display: inline-block;
+          background-color: rgba($grey, 0.1);
+          padding: 10px 10px;
+          border: none;
+          border-radius: 5px;
+          font-size: 11px;
+          margin: auto 5px;
+          font-weight: 600;
+          color: $white;
+          text-transform: uppercase;
+          white-space: nowrap;
+          @include noselect();
+        }
+      }
+    }
+
+    .placeholder {
+      background-color: rgba($grey, 0.1);
+      display: inline-block;
+
+      &.placeholder-wide {
+        width: 65%;
+        height: 16px;
+        margin-bottom: 5px;
+      }
+
+      &.placeholder-thin {
+        width: 45%;
+        height: 12px;
+      }
+
+      &.placeholder-button {
+        width: 40px;
+        height: 34px;
+      }
+    }
+  }
+
+  .additional-buttons {
+    text-align: right;
+    margin: 10px auto;
+
+    button {
+      display: inline-block;
+      padding: 10px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 11px;
+      margin: auto 5px;
+      font-weight: 600;
+      color: $white;
+      cursor: pointer;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      @include noselect();
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:active {
+        opacity: 0.7;
+      }
+    }
+
+    .add-all {
+      background-color: #0cf800;
+    }
+
+    .delete-all {
+      background-color: #ff4a4a;
+    }
+  }
+
+  .main-footer {
+    display: grid;
+    grid-template-columns: 0.7fr 1px 0.3fr;
+    grid-template-rows: 1fr;
+    background-color: rgba($black, 0.8);
+    border-top: 1px solid $white;
+
+    .about {
+      margin: 20px;
+      h2 {
+        font-size: 16px;
+        color: $white;
+        line-height: 1.5em;
+      }
+
+      p {
+        margin-top: 20px;
+        font-size: 11px;
+        color: $white;
+
+        b {
+          color: $white;
+        }
+      }
+
+      ul {
+        padding-left: 2em;
+
+        li {
+          list-style: disclosure-closed;
+        }
+      }
+    }
+
+    &__delimiter {
+      width: 1px;
+      height: 80%;
+      background-color: $white;
+      margin: auto;
+    }
+
+    .feedback {
+      margin: 20px;
+      justify-items: center;
+      h3 {
+        color: $white;
+        text-transform: uppercase;
+      }
+
+      .link-block {
+        margin-top: 15px;
+
+        .link-icon-wrapper {
+          display: inline-block;
+          margin: auto 5px;
+          .icon {
+            width: 22px;
+            height: 22px;
+            opacity: 0.3;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}

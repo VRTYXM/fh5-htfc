@@ -1,0 +1,47 @@
+@import '../_variables.scss';
+
+.categories {
+  display: flex;
+  justify-self: right;
+  height: fit-content;
+  align-self: center;
+
+  li {
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    @include noselect();
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.7;
+    }
+
+    &.active {
+      box-shadow: 0 0 0 2px $white;
+    }
+  }
+
+  [data-text='all'] {
+    background: linear-gradient(to bottom, #999999 17%, #e0e0e0);
+  }
+
+  [data-text='to-collect'] {
+    background: linear-gradient(to bottom, #ff4a4a, #ffafaf);
+  }
+
+  [data-text='collected'] {
+    background: linear-gradient(to bottom, #10d206, #9dff98);
+  }
+}
