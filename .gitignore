@@ -1,5 +1,9 @@
+# IDE
+.vscode/
+
 # Ignore node_modules
 **/node_modules
+*.lock
 
 # Ingore car photos in HQ
 **/cars_hq
