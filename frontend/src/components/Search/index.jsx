@@ -1,5 +1,5 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import debounce from 'lodash.debounce';
 
 import styles from './Search.module.scss';
@@ -9,6 +9,7 @@ import { setSearchValue } from '../../redux/slices/filterSlice';
 const Search = () => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
+  const searchValue = useSelector((state) => state.filters.searchValue);
   const [value, setValue] = useState('');
 
   const onClickClear = () => {
@@ -28,6 +29,10 @@ const Search = () => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
+
+  useEffect(() => {
+    setValue(searchValue);
+  }, [searchValue]);
 
   return (
     <div className={styles.root}>
