@@ -6,6 +6,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://mongo:27017/fh5-htfc';
+const PORT = process.env.PORT || 4444;
+
 if (!process.env.JWT_SECRET) {
   throw new Error('JWT_SECRET is not defined in .env file');
 }
@@ -18,7 +21,7 @@ import * as UserController from './controllers/UserController.js';
 import * as ContentController from './controllers/ContentController.js';
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/fh5-htfc')
+  .connect(MONGO_URI)
   .then(() => console.log('DB is OK'))
   .catch((err) => console.log('DB is not OK!', err));
 
@@ -82,7 +85,7 @@ app.patch(
 // Удалить одну карточку авто
 app.delete('/car-cards/:id', checkAuth, ContentController.removeOneCarCard);
 
-app.listen(4444, (err) => {
+app.listen(PORT, (err) => {
   if (err) {
     return console.log('Server is not OK!', err);
   }

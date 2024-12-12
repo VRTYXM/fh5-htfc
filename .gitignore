@@ -10,3 +10,6 @@
 
 # Ignore Environment Variables
 .env
+
+# Ignore Docker-compose
+docker-compose.yml
