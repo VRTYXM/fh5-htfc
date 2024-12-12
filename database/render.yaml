@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: mongodb-service
+    env: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    disk:
+      name: mongodb-data
+      mountPath: /data/db
+      sizeGB: 1
