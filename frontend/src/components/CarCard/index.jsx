@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCollectionStatus } from '../../redux/slices/carCards';
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL || 'http://localhost:4444';
+
 const CarCard = ({
   tableNumber,
   key,
@@ -44,7 +46,7 @@ const CarCard = ({
         <a href={wikiLink}>
           <img
             className="lazyload"
-            data-src={photo ? `http://localhost:4444/uploads/cars/${photo}` : ''}
+            data-src={photo ? `${REACT_APP_API_URL}/${photo}` : ''}
             alt={fullName}
           />
         </a>
