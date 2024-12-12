@@ -46,7 +46,7 @@ const CarCard = ({
         <a href={wikiLink}>
           <img
             className="lazyload"
-            data-src={photo ? `${REACT_APP_API_URL}/uploads/${photo}` : ''}
+            data-src={photo ? `${REACT_APP_API_URL}/uploads/cars/${photo}` : ''}
             alt={fullName}
           />
         </a>
