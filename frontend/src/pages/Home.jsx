@@ -35,22 +35,29 @@ function Home() {
 
   const [isAnyCarCardVisible, setIsAnyCarCardVisible] = useState(false);
 
-  const filteredCars = cars.items.filter((car) => {
-    const lowerSearch = searchValue.toLowerCase();
-    const matchesSearch =
-      car.fullName.toLowerCase().includes(lowerSearch) ||
-      car.nickname.toLowerCase().includes(lowerSearch);
-    const matchesCategory = activeCategory === 'all' || car.collectionStatus === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredCars =
+    cars.items.length > 0
+      ? cars.items.filter((car) => {
+          const lowerSearch = searchValue.toLowerCase();
+          const matchesSearch =
+            car.fullName.toLowerCase().includes(lowerSearch) ||
+            car.nickname.toLowerCase().includes(lowerSearch);
+          const matchesCategory =
+            activeCategory === 'all' || car.collectionStatus === activeCategory;
+          return matchesSearch && matchesCategory;
+        })
+      : [];
 
   useEffect(() => {
     setIsAnyCarCardVisible(filteredCars.length > 0);
   }, [filteredCars]);
 
-  const onChangeCategory = useCallback((id) => {
-    dispatch(setCategory(id));
-  }, []);
+  const onChangeCategory = useCallback(
+    (id) => {
+      dispatch(setCategory(id));
+    },
+    [dispatch],
+  );
 
   /*
   const getCarCards = async () => {

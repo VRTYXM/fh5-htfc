@@ -1,6 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../axios.js';
+import axiosRetry from 'axios-retry';
+
 import { countCollectedCars } from '../../utils/countCollectedCars.js';
+
+axiosRetry(axios, {
+  retries: 3,
+  retryDelay: (retryCount) => retryCount * 1000,
+  retryCondition: (error) => !error.response || error.response.status >= 500,
+});
 
 const loadFromLocalStorage = () => {
   return JSON.parse(localStorage.getItem('carStatuses')) || [];
@@ -10,10 +18,17 @@ const saveToLocalStorage = (statuses) => {
   localStorage.setItem('carStatuses', JSON.stringify(statuses));
 };
 
-export const fetchCarCards = createAsyncThunk('car-cards/fetchCarCards', async () => {
-  const { data } = await axios.get('/car-cards');
-  return data;
-});
+export const fetchCarCards = createAsyncThunk(
+  'car-cards/fetchCarCards',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get('/car-cards');
+      return data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data || 'An unknown error occurred');
+    }
+  },
+);
 
 const initialState = {
   cars: {
@@ -68,7 +83,11 @@ const carCardSlice = createSlice({
         state.cars.status = 'loading';
       })
       .addCase(fetchCarCards.fulfilled, (state, action) => {
-        const savedStatuses = loadFromLocalStorage();
+        const savedStatuses = loadFromLocalStorage() || [];
+
+        if (!Array.isArray(savedStatuses)) {
+          console.error('Invalid data in localStorage: expected an array');
+        }
 
         state.cars.items = action.payload.map((item, index) => {
           const savedStatus = savedStatuses.find((status) => status.id === item._id);
