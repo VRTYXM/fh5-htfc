@@ -2,6 +2,10 @@
 @import './normalize.scss';
 @import './components/_all.scss';
 
+html {
+  font-size: 16px;
+}
+
 body {
   background-image: url(../assets/img/bcg-ferrari.jpg);
   background-repeat: no-repeat;
@@ -36,12 +40,32 @@ body {
       margin-left: 10px;
       align-self: center;
     }
+
+    @media (max-width: 445px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(1, 1fr);
+
+      p {
+        margin-left: 0px;
+        align-self: auto;
+        justify-self: center;
+      }
+
+      .categories {
+        justify-self: center;
+
+        li:last-child {
+          margin-right: 0;
+        }
+      }
+    }
   }
 
   .car-cards {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    font-size: calc(0.5rem + 0.5vw);
 
     .car-cards__legend {
       color: $white;
@@ -105,6 +129,11 @@ body {
         transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         @include noselect();
 
+        @media (max-width: 445px) {
+          padding: 5px 5px;
+          font-size: 0.5rem;
+        }
+
         &:hover {
           opacity: 0.8;
         }
@@ -120,6 +149,7 @@ body {
         .number {
           color: $white;
           -webkit-text-stroke: 0.5px;
+          padding-left: 5px;
         }
 
         .photo {
@@ -138,6 +168,11 @@ body {
             &.lazyloaded {
               opacity: 1;
             }
+
+            @media (max-width: 445px) {
+              max-height: 40px;
+              max-width: 80px;
+            }
           }
         }
 
@@ -154,6 +189,10 @@ body {
 
           .nickname {
             color: $grey;
+          }
+
+          @media (max-width: 445px) {
+            padding-right: 5px;
           }
         }
 
@@ -282,6 +321,11 @@ body {
       &:active {
         opacity: 0.7;
       }
+
+      @media (max-width: 445px) {
+        padding: 5px 5px;
+        font-size: 0.5rem;
+      }
     }
 
     .add-all {
@@ -295,13 +339,14 @@ body {
 
   .main-footer {
     display: grid;
-    grid-template-columns: 0.7fr 1px 0.3fr;
+    grid-template-columns: 0.6fr 1px 0.4fr;
     grid-template-rows: 1fr;
     background-color: rgba($black, 0.8);
     border-top: 1px solid $white;
 
     .about {
       margin: 20px;
+
       h2 {
         font-size: 16px;
         color: $white;
@@ -324,6 +369,10 @@ body {
         li {
           list-style: disclosure-closed;
         }
+      }
+
+      @media (max-width: 445px) {
+        margin: 20px 20px 0 20px;
       }
     }
 
@@ -355,6 +404,14 @@ body {
             cursor: not-allowed;
           }
         }
+      }
+    }
+
+    @media (max-width: 445px) {
+      grid-template-columns: auto;
+
+      &__delimiter {
+        display: none;
       }
     }
   }
