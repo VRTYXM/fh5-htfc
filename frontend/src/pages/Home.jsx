@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import lazySizes from 'lazysizes';
 
@@ -24,6 +24,9 @@ function Home() {
   };
 
   const dispatch = useDispatch();
+  const [isUpButtonVisible, setIsUpButtonVisible] = useState(false);
+  const upButton = useRef(null);
+
   const { cars } = useSelector((state) => state.carCards);
 
   const category = useSelector((state) => state.filters.category);
@@ -68,11 +71,30 @@ function Home() {
   useEffect(() => {
     dispatch(fetchCarCards());
   }, []);
-  console.log(cars);
 
   const onClickUpdateAll = (type) => {
     if (window.confirm(`Shall I mark ALL the cars as '${type}'?`))
       dispatch(updateAllCollectionStatuses(type));
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setIsUpButtonVisible(true);
+      } else {
+        setIsUpButtonVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -108,10 +130,9 @@ function Home() {
                     photo={obj.photo}
                     wikiLink={obj.wikiLink}
                     collectionStatus={obj.collectionStatus}
-                    activeCategory={activeCategory}
                   />
                 ))}
-            {!isAnyCarCardVisible && (
+            {!isAnyCarCardVisible && !areCarsLoading && (
               <tr className="not-found">
                 <td className="number">—</td>
                 <td className="photo">
@@ -141,6 +162,13 @@ function Home() {
             Delete All
           </button>
         </div>
+        <button
+          ref={upButton}
+          id="scrollToTop"
+          className={`scroll-to-top ${isUpButtonVisible ? 'show' : ''}`}
+          onClick={scrollToTop}>
+          ⇭
+        </button>
       </div>
       <div className="main-footer">
         <div className="about">

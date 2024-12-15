@@ -13,12 +13,9 @@ const CarCard = ({
   photo,
   wikiLink,
   collectionStatus,
-  activeCategory,
 }) => {
   const classRef = useRef();
   const dispatch = useDispatch();
-
-  const isVisible = activeCategory === 'all' || collectionStatus === activeCategory;
 
   const handleSetCollected = () => {
     if (classRef.current) {
@@ -37,13 +34,10 @@ const CarCard = ({
   };
 
   return (
-    <tr
-      ref={classRef}
-      className={collectionStatus}
-      style={{ display: isVisible ? 'table-row' : 'none' }}>
+    <tr ref={classRef} className={collectionStatus}>
       <td className="number">{tableNumber}</td>
       <td className="photo">
-        <a href={wikiLink}>
+        <a href={wikiLink} target="_blank" title={`${fullName} page on Forza Wiki`}>
           <img
             className="lazyload"
             data-src={photo ? `${REACT_APP_API_URL}/uploads/cars/${photo}` : ''}
