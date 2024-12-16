@@ -44,6 +44,8 @@ body::before {
     width: 50px;
     height: 50px;
     font-size: 2rem;
+    text-align: center;
+    vertical-align: middle;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
@@ -52,6 +54,7 @@ body::before {
     opacity: 0;
     transform: translateY(-20px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    @include noselect();
 
     &.show {
       visibility: visible;
@@ -60,8 +63,15 @@ body::before {
       transform: translateY(0);
     }
 
-    &:hover {
+    &:hover,
+    &:active {
       opacity: 1;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      &:hover {
+        opacity: 0.9;
+      }
     }
   }
 }
@@ -206,10 +216,10 @@ body::before {
           position: relative;
 
           .placeholder {
-            width: 120px;
+            width: 100px;
 
             @media (max-width: 445px) {
-              width: 100px;
+              width: 80px;
             }
           }
 
@@ -333,6 +343,11 @@ body::before {
       background-color: rgba($grey, 0.1);
       display: inline-block;
 
+      &.placeholder-image {
+        width: 100%;
+        height: 100%;
+      }
+
       &.placeholder-wide {
         width: 65%;
         height: 16px;
@@ -347,6 +362,7 @@ body::before {
       &.placeholder-button {
         width: 48px;
         height: 34px;
+        margin: auto 5px;
 
         @media (max-width: 445px) {
           width: 30px;
@@ -447,6 +463,9 @@ body::before {
     .feedback {
       margin: 20px;
       justify-items: center;
+      place-items: center;
+      text-align: center;
+
       h3 {
         color: $white;
         text-transform: uppercase;

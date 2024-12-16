@@ -3,9 +3,9 @@ import React from 'react';
 const Skeleton = () => {
   return (
     <tr>
-      <td className="number">—</td>
+      <td className="number">———</td>
       <td className="photo">
-        <div className="placeholder"></div>
+        <div className="placeholder placeholder-image"></div>
       </td>
       <td className="names">
         <div className="placeholder placeholder-wide"></div>
