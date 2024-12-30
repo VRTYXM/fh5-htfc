@@ -1,20 +1,37 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Header from './components/Header';
 import Home from './pages/Home';
-import Authorisation from './pages/Authorisation';
-import NotFound from './pages/NotFound';
 
 import './scss/app.scss';
 import MainLayout from './layouts/MainLayout';
+
+const Authorisation = lazy(() =>
+  import(/* webpackChunkName: "Authorisation" */ './pages/Authorisation'),
+);
+const NotFound = lazy(() => import(/* webpackChunkName: "NotFound" */ './pages/NotFound'));
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route path="" element={<Home />} />
-        <Route path="auth" element={<Authorisation />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="auth"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Authorisation />
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <NotFound />
+            </Suspense>
+          }
+        />
       </Route>
     </Routes>
   );

@@ -17,7 +17,7 @@ function Header() {
       <div className="container">
         <Link to="/">
           <div onClick={setFiltersDefault} className="header__logo">
-            <img width="40" src={logoSvg} alt="Hard-to-Find Collector Logo" />
+            <img src={logoSvg} alt="Hard-to-Find Collector Logo" />
             <h1>Hard-to-Find Helper</h1>
           </div>
         </Link>
